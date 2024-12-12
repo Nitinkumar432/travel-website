@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Flight</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      color: #333333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .details span {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #333;
+    }
+    .form label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 16px;
+      color: #555;
+    }
+    .form input, .form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #333;
+    }
+    .form button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .form button:hover {
+      background-color: #0056b3;
+    }
+    .traveler-container {
+      margin-top: 20px;
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    .traveler {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding: 8px;
+      border-radius: 5px;
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    .traveler input {
+      width: 45%;
+      font-size: 16px;
+      padding: 8px;
+      margin: 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    .remove-traveler {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    .remove-traveler:hover {
+      background-color: #c82333;
+    }
+    .total-fare {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #007bff;
+      text-align: center;
+    }
+    #addTravelerBtn {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    #addTravelerBtn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Book Your Flight</h1>
+    </div>
+
+    <div class="details">
+      <h2>Flight Details</h2>
+      <span><strong>Name:</strong> <%= flight.flightName %></span>
+      <span><strong>Company:</strong> <%= flight.companyName %></span>
+      <span><strong>From:</strong> <%= flight.source %></span>
+      <span><strong>To:</strong> <%= flight.destination %></span>
+      <span><strong>Duration:</strong> <%= flight.duration %></span>
+      <span><strong>Baggage:</strong> <%= flight.baggageAllowance %></span>
+    </div>
+
+    <div class="form">
+      <form id="bookingForm" action="/book/<%= flight._id %>" method="POST">
+        <label for="classType">Class Type</label>
+        <select id="classType" name="classType" required>
+          <% flight.ticketOptions.forEach(option => { %>
+            <option value="<%= option.classType %>">
+              <%= option.classType %> - ₹<%= option.price %>
+            </option>
+          <% }); %>
+        </select>
+
+        <!-- Traveler Details Section -->
+        <div id="travelerSection">
+          <div class="traveler-container">
+            <div class="traveler">
+              <input type="text" name="travelerName[]" placeholder="Enter Traveler Name" required>
+              <input type="number" name="travelerPrice[]" value="4500" readonly>
+              <button type="button" class="remove-traveler" style="display: none;">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" id="addTravelerBtn">Add Another Traveler</button>
+
+        <div class="total-fare">
+          <span>Total Fare (in INR): ₹<span id="totalFare">4500</span></span>
+        </div>
+
+        <button type="submit">Calculate Fare & Book</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Get elements
+    const addTravelerBtn = document.getElementById('addTravelerBtn');
+    const travelerSection = document.getElementById('travelerSection');
+    const totalFareElement = document.getElementById('totalFare');
+    let travelerCount = 1;
+
+    // Function to update total fare in INR
+    function updateTotalFare() {
+      const travelerPrices = document.querySelectorAll('input[name="travelerPrice[]"]');
+      let totalPrice = 0;
+      travelerPrices.forEach(priceInput => {
+        totalPrice += parseFloat(priceInput.value);
+      });
+
+      totalFareElement.textContent = totalPrice.toFixed(2);
+    }
+
+    // Add new traveler row
+    addTravelerBtn.addEventListener('click', () => {
+      travelerCount++;
+
+      // Set price dynamically based on traveler count
+      const price = travelerCount === 2 ? 9000 : 4500;
+
+      // Add traveler with price
+      const newTravelerDiv = document.createElement('div');
+      newTravelerDiv.classList.add('traveler');
+      newTravelerDiv.innerHTML = `
+        <input type="text" name="travelerName[]" placeholder="Enter Traveler Name" required>
+        <input type="number" name="travelerPrice[]" value="${price}" readonly>
+        <button type="button" class="remove-traveler">Remove</button>
+      `;
+
+      // Append the new traveler
+      travelerSection.querySelector('.traveler-container').appendChild(newTravelerDiv);
+      updateTotalFare();
+
+      // Show "Remove" button for travelers
+      newTravelerDiv.querySelector('.remove-traveler').style.display = 'inline-block';
+
+      // Remove traveler event
+      newTravelerDiv.querySelector('.remove-traveler').addEventListener('click', () => {
+        newTravelerDiv.remove();
+        updateTotalFare();
+      });
+    });
+
+    // Initialize the first traveler
+    updateTotalFare();
+  </script>
+</body>
+</html>

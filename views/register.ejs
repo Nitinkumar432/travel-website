@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Website Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://via.placeholder.com/1600x900');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .register-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            margin-top:300px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .spinner-border {
+            display: none;
+        }
+
+        /* Custom pop-up style */
+        #successPopup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        #successPopup h4 {
+            margin-bottom: 20px;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="overlay"></div>
+
+    <div id="successPopup">
+        <h4>Registration Successful!</h4>
+        <button class="btn btn-primary" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="register-container">
+        <h2 class="text-center">Travel Website Registration</h2>
+        <form id="registerForm">
+
+            <!-- Name fields in one row -->
+            <div class="form-row">
+                <div class="mb-3 w-50">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="John" required>
+                </div>
+                <div class="mb-3 w-50">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Doe" required>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="email@example.com" required>
+                <div id="emailError" class="error"></div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" placeholder="+1234567890" required>
+                <div id="phoneError" class="error"></div>
+            </div>
+
+            <!-- Username -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                <div id="usernameError" class="error"></div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="123 Main St">
+            </div>
+
+            <!-- Emergency Contact Information -->
+            <h4>Emergency Contact Information</h4>
+            <div class="form-row">
+                <div class="mb-3 w-50">
+                    <label for="emergencyName" class="form-label">Emergency Contact Name</label>
+                    <input type="text" class="form-control" id="emergencyName" placeholder="Jane Doe">
+                </div>
+                <div class="mb-3 w-50">
+                    <label for="emergencyPhone" class="form-label">Emergency Contact Phone</label>
+                    <input type="tel" class="form-control" id="emergencyPhone" placeholder="+1234567890">
+                </div>
+            </div>
+
+            <!-- Passport Information -->
+            <h4>Passport Information</h4>
+            <div class="form-row">
+                <div class="mb-3 w-50">
+                    <label for="passportNumber" class="form-label">Passport Number</label>
+                    <input type="text" class="form-control" id="passportNumber" placeholder="A12345678">
+                </div>
+                <div class="mb-3 w-50">
+                    <label for="passportExpiry" class="form-label">Passport Expiry Date</label>
+                    <input type="date" class="form-control" id="passportExpiry">
+                </div>
+            </div>
+
+            <!-- Travel Preferences -->
+            <div class="mb-3">
+                <label for="travelPreferences" class="form-label">Travel Preferences</label>
+                <textarea class="form-control" id="travelPreferences" rows="3" placeholder="Your preferences..."></textarea>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="mb-3">
+                <input type="checkbox" id="newsletter">
+                <label for="newsletter" class="form-label">Subscribe to Newsletter</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" id="registerBtn">Register
+                <div class="spinner-border spinner-border-sm text-light" role="status" id="loadingSpinner"></div>
+            </button>
+
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Clear any existing error messages
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('phoneError').textContent = '';
+            document.getElementById('usernameError').textContent = '';
+
+            const registerBtn = document.getElementById('registerBtn');
+            const spinner = document.getElementById('loadingSpinner');
+            spinner.style.display = 'inline-block';
+            registerBtn.disabled = true;
+
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                address: document.getElementById('address').value,
+                emergencyContact: {
+                    name: document.getElementById('emergencyName').value,
+                    phone: document.getElementById('emergencyPhone').value
+                },
+                passportInfo: {
+                    number: document.getElementById('passportNumber').value,
+                    expiryDate: document.getElementById('passportExpiry').value
+                },
+                travelPreferences: document.getElementById('travelPreferences').value,
+                newsletter: document.getElementById('newsletter').checked
+            };
+
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+                spinner.style.display = 'none';
+                registerBtn.disabled = false;
+
+                if (result.error) {
+                    if (result.error === 'email') {
+                        document.getElementById('emailError').textContent = result.message;
+                    } else if (result.error === 'phone') {
+                        document.getElementById('phoneError').textContent = result.message;
+                    } else if (result.error === 'username') {
+                        document.getElementById('usernameError').textContent = result.message;
+                    }
+                } else if (result.success) {
+                    openPopup();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                spinner.style.display = 'none';
+                registerBtn.disabled = false;
+            }
+        });
+
+        function openPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('successPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('successPopup').style.display = 'none';
+            document.getElementById('registerForm').reset();
+        }
+    </script>
+</body>
+
+</html>

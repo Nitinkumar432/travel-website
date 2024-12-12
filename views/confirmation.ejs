@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .container h1 {
+      color: #28a745;
+    }
+    .details {
+      margin-top: 20px;
+      text-align: left;
+    }
+    .details span {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Booking Confirmed!</h1>
+    <div class="details">
+      <h2>Summary</h2>
+      <span><strong>Flight Name:</strong> <%= flight.flightName %></span>
+      <span><strong>Company:</strong> <%= flight.companyName %></span>
+      <span><strong>Traveler:</strong> <%= travelerName %></span>
+      <span><strong>Seats:</strong> <%= seatCount %></span>
+      <span><strong>Class:</strong> <%= classType %></span>
+      <span><strong>Total Fare:</strong> $<%= totalPrice %></span>
+    </div>
+  </div>
+</body>
+</html>

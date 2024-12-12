@@ -1,0 +1,266 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007BFF;
+    padding: 10px 20px;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .header-left .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .header-right ul {
+    list-style: none;
+    margin-right:150px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .header-right li {
+    display: inline;
+  }
+  
+  .header-right a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .header-right a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Modify Search Form */
+  .modify-search-form {
+    margin-top: 80px; /* Space for the fixed header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .search-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .submit-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Flight Cards */
+/* Flight Cards Container */
+/* Flight Cards Container */
+/* Flight Cards Container */
+.flight-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Flight Card */
+  .flight-card {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    height: auto; /* Allow dynamic height based on content */
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .flight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); /* Add hover shadow for visual effect */
+  }
+  
+  /* Flight Card Header */
+  .flight-card-header {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .flight-card-header h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 3px;
+  }
+  
+  .flight-card-header p {
+    font-size: 10px;
+    color: #777;
+  }
+  
+  /* Flight Card Body */
+  .flight-card-body {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .flight-card-body h4 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Ticket Options: Displaying in Single Row */
+  .ticket-options {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping in case of overflow */
+    gap: 10px;
+  }
+  
+  .ticket-option {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #555;
+    width: calc(33.33% - 10px); /* Three items per row, with some space between */
+    min-width: 120px; /* Minimum width to avoid crowding */
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .ticket-option span {
+    flex: 1;
+  }
+  
+  /* Price Styling */
+  .price {
+    font-size: 18px; /* Make the price larger */
+    font-weight: bold;
+    color: #28a745; /* Green for emphasis */
+  }
+  
+  /* Flight Card Footer */
+  .flight-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  
+  .book-now-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .book-now-btn i {
+    margin-right: 5px;
+    font-size: 16px;
+  }
+  
+  .book-now-btn:hover {
+    background-color: #218838;
+  }
+  
+  /* Highlight selected flight */
+  .flight-card.selected {
+    border: 2px solid #007bff; /* Add a blue border to highlight selected flight */
+  }
+  
+  /* Adjustments for small screen */
+  @media (max-width: 768px) {
+    .flight-card {
+      padding: 8px;
+    }
+  
+    .flight-card-header h3 {
+      font-size: 13px;
+    }
+  
+    .flight-card-body h4 {
+      font-size: 13px;
+    }
+  
+    .ticket-option {
+      width: 100%; /* Stack ticket options in a single column on smaller screens */
+    }
+  
+    .book-now-btn {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+  }
+  
+  

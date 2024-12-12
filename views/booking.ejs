@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Ticket Booking</title>
+  <link rel="stylesheet" href="css/booking.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+</head>
+<body>
+  <header class="ticket-booking-header">
+    <div class="ticket-logo-container">
+      <img src="logo.png" alt="Company Logo" class="ticket-logo">
+    </div>
+    <nav class="ticket-nav">
+      <ul class="ticket-nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#offers">Offers</a></li>
+        <li><a href="#help">Help</a></li>
+      </ul>
+    </nav>
+    <div class="ticket-profile-container">
+      <ul class="ticket-profile-links">
+          <% if (user) { %>
+              <!-- If user is logged in, show Profile and Logout links -->
+              <li><a href="#profile">Profile</a></li>
+              <li><a href="#logout">Logout</a></li>
+          <% } else { %>
+              <!-- If user is not logged in, show Login link -->
+              <li><a href="#login">Login</a></li>
+          <% } %>
+      </ul>
+  </div>
+  
+  </header>
+  
+  
+<div class="container">
+  <!-- Top Row Advertisement Section -->
+  <div class="top-ad-section">
+    <div class="ad-text">
+      <h2>Exciting Offers on Flights!</h2>
+      <p>Book your tickets today and enjoy incredible discounts and perks!</p>
+    </div>
+<!-- Advertisement Section -->
+<div class="advertisement">
+  <img src="https://www.ixigo.com/rail/next/image?url=https%3A%2F%2Fimages.ixigo.com%2Fimage%2Fupload%2FtravelGuarantee%2F598326b7b6aacb4a0dff18c5914267b9-babsc.png&w=384&q=75" alt="Special Deal" class="advertisement-image">
+</div>
+
+  </div>
+
+  <!-- Logo -->
+  <div class="logo">
+    <i class="fas fa-plane-departure"></i>
+    <h1>AirTicket India</h1>
+  </div>
+
+  <!-- Flight Booking Form -->
+  <form id="bookingForm" action="/book-flight" method="POST" onsubmit="return validateForm();">
+    <!-- Search Section -->
+    <div class="search-section">
+      <div class="form-group">
+        <label for="source"><i class="fas fa-map-marker-alt"></i> Source</label>
+        <input type="text" id="source" name="source" placeholder="Enter source city" required>
+        <small class="error-msg" id="sourceError"></small>
+      </div>
+      <div class="form-group">
+        <label for="destination1"><i class="fas fa-map-marker-alt"></i> Destination</label>
+        <input type="text" id="destination1" name="destinations[]" placeholder="Enter destination city" required>
+        <small class="error-msg" id="destinationError"></small>
+      </div>
+      <div class="form-group">
+        <label for="travelDate"><i class="fas fa-calendar-alt"></i> Date of Travel</label>
+        <input type="text" id="travelDate" name="travelDate" placeholder="Select travel date" required>
+        <small class="error-msg" id="dateError"></small>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-btn"><i class="fas fa-search"></i> Search Flights</button>
+  </form>
+
+  <!-- Recommended Cities Section -->
+  <div class="recommended-cities">
+    <h3><strong>Recommended Cities</strong></h3>
+    <div class="city-item">
+      <img src="https://in.bmscdn.com/m6/images/common-modules/regions/ncr.png" alt="City Logo">
+      <span>Delhi</span>
+    </div>
+    <div class="city-item">
+      <img src="https://in.bmscdn.com/m6/images/common-modules/regions/mumbai.png" alt="City Logo">
+      <span>Mumbai</span>
+    </div>
+    <div class="city-item">
+      <img src="https://in.bmscdn.com/m6/images/common-modules/regions/bang.png" alt="City Logo">
+      <span>Bangalore</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="ad-slider-container">
+  <div class="ad-slider">
+    <img src="https://www.ixigo.com/rail/next/image?url=https%3A%2F%2Fimages.ixigo.com%2Fimage%2Fupload%2Ftrains%2Fmweb%2F9d8a7f964148cd188b4577e471557a84-kvris.png&w=384&q=75" alt="Advertisement 1">
+    <img src="https://www.ixigo.com/rail/next/image?url=https%3A%2F%2Fimages.ixigo.com%2Fimage%2Fupload%2Ftrains%2Fmweb%2F74585591ee56b87f962067061cb2315a-atjxd.png&w=384&q=75" alt="Advertisement 2">
+    <img src="https://www.ixigo.com/rail/next/image?url=https%3A%2F%2Fimages.ixigo.com%2Fimage%2Fupload%2Ftrains%2Fmweb%2F2e75ee337a6fa28e47c2da9cbeaee226-bbtsr.png&w=384&q=75" alt="Advertisement 3">
+    <img src="https://www.ixigo.com/rail/next/image?url=https%3A%2F%2Fimages.ixigo.com%2Fimage%2Fupload%2Ftrains%2Fmweb%2F9d8a7f964148cd188b4577e471557a84-kvris.png&w=384&q=75" alt="Advertisement 4">
+    <img src="https://www.ixigo.com/rail/next/image?url=https%3A%2F%2Fimages.ixigo.com%2Fimage%2Fupload%2Ftrains%2Fmweb%2Ffa00c38bf0eb6b51b94eb18423b43163-pwoxm.png&w=384&q=75" alt="Advertisement 5">
+  </div>
+</div>
+<script>
+  $(function () {
+    $("#travelDate").datepicker({
+      minDate: 0,
+      dateFormat: "yy-mm-dd",
+    });
+  });
+
+  const indianCities = [
+    "Delhi", "Mumbai", "Bangalore", "Chennai", "Hyderabad", "Kolkata",
+    "Pune", "Ahmedabad", "Jaipur", "Surat", "Lucknow","Patna","Hajipur"
+  ];
+
+  $("#source, #destination1").autocomplete({
+    source: indianCities
+  });
+
+  function validateForm() {
+    let isValid = true;
+    $(".error-msg").text("");
+    if ($("#source").val().trim() === "") {
+      $("#sourceError").text("Source city is required.");
+      isValid = false;
+    }
+    if ($("#destination1").val().trim() === "") {
+      $("#destinationError").text("Destination city is required.");
+      isValid = false;
+    }
+    if ($("#travelDate").val().trim() === "") {
+      $("#dateError").text("Travel date is required.");
+      isValid = false;
+    }
+    return isValid;
+  }
+</script>
+<script src="js/booking.js"></script>
+
+</body>
+</html>

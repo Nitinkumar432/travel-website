@@ -1,0 +1,351 @@
+/* booking css */
+/* Ensure the body and html fill the full viewport */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.ticket-booking-header {
+  display: flex;
+  justify-content: space-between; /* Space out logo, nav links, and profile */
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #fc921a; /* Beautiful green background */
+  box-shadow: 0px 4px 10px rgba(160, 142, 116, 0.1);
+  width: 100%; /* Full width of the screen */
+  position: fixed; /* Fix it at the top */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
+.ticket-logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Center the logo */
+}
+
+.ticket-logo {
+  height: 40px; /* Adjust the logo size */
+  width: auto;
+}
+
+.ticket-nav {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-nav-links {
+  display: flex;
+  gap: 20px; /* Space between links */
+  list-style: none;
+  margin: 0;
+}
+
+.ticket-nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.ticket-nav-links li a:hover {
+  color: #FFD700; /* Gold color for hover effect */
+}
+
+.ticket-profile-container {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.ticket-profile-links {
+  display: flex;
+  list-style: none;
+  gap: 15px; /* Space between profile links */
+  margin: 0;
+}
+
+.ticket-profile-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.ticket-profile-links li a:hover {
+  color: #FFD700; /* Gold color for hover effect */
+}
+
+/* Add padding to the top of the booking container to avoid overlap with fixed header */
+.booking-container {
+  margin-top: 100px; /* Adjust this value based on the height of your header */
+}
+
+/* Responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .ticket-booking-header {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .ticket-logo-container {
+    margin-bottom: 10px;
+  }
+
+  .ticket-nav {
+    width: 100%;
+    justify-content: space-around; /* Space the nav links evenly */
+  }
+
+  .ticket-profile-container {
+    margin-top: 10px;
+    justify-content: center;
+  }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    background-color: #f2f5f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 900px;
+    background: #ffffff;
+    padding: 30px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  /* Logo Styling */
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .logo i {
+    font-size: 32px;
+    color: #007bff;
+  }
+
+  .logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #007bff;
+  }
+
+  /* Form Styling */
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .form-group {
+    flex: 1 1 30%;
+    position: relative;
+  }
+
+  label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus {
+    border: 1px solid #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  }
+
+  /* Search Section */
+  .search-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .search-section .form-group {
+    flex: 1;
+  }
+
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+
+  /* Recommended Cities */
+  .recommended-cities {
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  .city-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .city-item img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+
+  .city-item span {
+    font-size: 16px;
+    color: #333;
+  }
+
+  /* Advertisement Section */
+  .advertisement {
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  body {
+    background-color: #f2f5f9;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    background: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Top Advertisement Section */
+  .top-ad-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #007bff;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .top-ad-section .ad-text h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .top-ad-section .ad-text p {
+    margin: 5px 0 0;
+    font-size: 16px;
+  }
+  
+  .top-ad-section .ad-media video {
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Logo Section */
+  .logo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo i {
+    font-size: 50px;
+    color: #007bff;
+  }
+  
+  .logo h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #333;
+  }
+  
+  /* Remaining Styles Remain Unchanged */
+  .ad-slider-container {
+    margin-top: 30px;
+    position: fixed; /* Stick to the bottom */
+    left: 50%; /* Center horizontally */
+    bottom: 0; /* Align it at the bottom */
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 960px; /* Adjust max-width to show 3 images */
+    height: 100px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    z-index: 1000;
+  }
+  
+  .ad-slider {
+    display: flex; /* To display images in a row */
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .ad-slider img {
+    width: 33.33%; /* Show 3 images at a time */
+    height: auto;
+    flex-shrink: 0; /* Prevent shrinking */
+    border-radius: 10px;
+  }
+  
